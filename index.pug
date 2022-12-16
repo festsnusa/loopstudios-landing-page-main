@@ -1,0 +1,73 @@
+mixin list(arr)
+  ul.header__list
+    each value in arr
+      li.header__item
+        a.header__link(href="#!" aria-label= value)= value
+
+mixin images(arr)
+  .images
+    h1.images__title.heading our creations
+    .images__box
+      each value in arr
+        a(href="#!" aria-label="image") 
+          .images__image
+            p.images__text.heading= value
+    a.images__link(href="#!" aria-label="see-all") 
+      .images__button see all
+
+mixin links(arr)
+  ul.footer__list 
+    each value in arr 
+      li.footer__item
+        a.footer__link(href="#!")= value
+
+mixin brands(data)
+  ul.footer__brands
+    each value in data
+      -arr = value.split('-')
+      li.footer__item
+        a.footer__link.footer__link_brands(href=`https://${arr[arr.length-1]}.com` target='_blank')
+          i.fa-brands(class= value)
+
+doctype html
+html(lang="en")
+  head
+    meta(charset="UTF-8")
+    meta(http-equiv="X-UA-Compatible", content="IE=edge")
+    meta(name="viewport", content="width=device-width, initial-scale=1.0")
+    title Loopstudios landing page
+    link(rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.2.1/css/all.min.css" integrity="sha512-MV7K8+y+gLIBoVD59lQIYicR65iaqukzvf/nwasF0nqhPay5w/9lJmVM2hMDcnK1OnMGCdVK+iQrJ7lzPJQd1w==" crossorigin="anonymous" referrerpolicy="no-referrer")
+    link(rel="stylesheet", href="./style.css")
+    link(rel="icon" type="image/png" sizes="32x32" href="./images/favicon-32x32.png")
+  body 
+    .component
+      header.component__header
+        .header 
+          .header__header
+            a.header__logo(href="#" aria-label="home") 
+              img.header__image(src="./images/logo.svg", alt="logo")
+            img.header__burger(src="./images/icon-hamburger.svg" alt="menu")
+            +list(["about", "careers", "events", "products", "support"])
+          p.header__text.heading Immersive experiences that deliver
+      main.component__main
+        .main
+          article.main__article 
+            img.main__image(src="", alt="interactive")
+            .main__box
+              h1.main__title.heading The leader in interactive VR
+              p.main__subtitle Founded in 2011, Loopstudios has been producing world-class virtual reality 
+                | projects for some of the best companies around the globe. Our award-winning 
+                | creations have transformed businesses through digital experiences that bind 
+                | to their brand.
+          .main__images 
+            +images(["deep earth", "Night arcade", "Soccer team VR", "The grid", "From up above VR", "Pocket borealis", "The curiosity", "make it fisheye"])
+      footer.component__footer
+        .footer
+          .footer__header
+            a(href="#" aria-label="home") 
+              img.footer__logo(src="./images/logo.svg", alt="logo")
+            +links(["about", "careers", "events", "products", "support"])
+          .footer__footer
+            +brands(["fa-square-facebook", "fa-twitter", "fa-pinterest", "fa-instagram"])
+            p.footer__copyright © 2021 Loopstudios. All rights reserved.
+    script(src="./app.js")
